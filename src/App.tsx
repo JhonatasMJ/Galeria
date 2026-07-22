@@ -1,5 +1,6 @@
 import InputText from "./components/input-text-";
 import SearchIcon from "./assets/icons/search.svg?react";
+import Checkbox from "./components/checkbox";
 
 export default function App() {
   return (
@@ -10,6 +11,9 @@ export default function App() {
           icon={SearchIcon}
           placeholder="Digite seu nome"
         />
+      </div>
+      <div>
+        <Checkbox />
       </div>
     </div>
   );
