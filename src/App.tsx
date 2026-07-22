@@ -1,6 +1,7 @@
 import InputText from "./components/input-text-";
 import SearchIcon from "./assets/icons/search.svg?react";
 import Checkbox from "./components/checkbox";
+import SingleFile from "./components/single-file";
 
 export default function App() {
   return (
@@ -14,6 +15,9 @@ export default function App() {
       </div>
       <div>
         <Checkbox />
+      </div>
+      <div>
+        <SingleFile />
       </div>
     </div>
   );
