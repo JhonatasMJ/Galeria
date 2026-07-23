@@ -19,7 +19,12 @@ export default function App() {
         <Checkbox />
       </div>
       <div>
-        <SingleFile form={form} {...form.register("file")} />
+        <SingleFile
+          allowedExtensions={["jpg", "png", "jpeg", "webp"]}
+          maxFileSize={50}
+          form={form}
+          {...form.register("file")}
+        />
       </div>
     </div>
   );

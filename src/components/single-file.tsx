@@ -14,8 +14,11 @@ export const singleFilerVariants = tv({
 });
 
 interface SingleFileProps
-  extends VariantProps<typeof singleFilerVariants>,
+  extends
+    VariantProps<typeof singleFilerVariants>,
     Omit<ComponentProps<"input">, "type"> {
+  allowedExtensions: string[];
+  maxFileSize: number;
   form: any;
   error?: ReactNode;
 }
@@ -24,6 +27,8 @@ export default function SingleFile({
   className,
   error,
   form,
+  allowedExtensions,
+  maxFileSize,
   ...props
 }: SingleFileProps) {
   const formValue = useWatch({
@@ -32,14 +37,35 @@ export default function SingleFile({
 
   const name = props.name || "";
 
-  const formFile: File = useMemo(
-    () => formValue[name]?.[0],
-    [formValue, name]
+  // Verifica se tem um arquivo selecionado
+  const formFile: File = useMemo(() => formValue[name]?.[0], [formValue, name]);
+
+  const { fileExtension, fileSize } = useMemo(
+    () => ({
+      fileExtension: formFile?.name.split(".").pop()?.toLocaleLowerCase() || "",
+      fileSize: formFile?.size || 0,
+    }),
+    [formFile],
   );
+
+  // Verifica se o arquivo tem a extensão permitida
+  function isValidExtension() {
+    return allowedExtensions.includes(fileExtension);
+  }
+
+  // Verifica se o arquivo tem o tamanho permitido
+  function isValidSize() {
+    return fileSize <= maxFileSize * 1024 * 1024;
+  }
+
+  // Verifica se o arquivo é válido
+  function isValidFile() {
+    return isValidExtension() && isValidSize();
+  }
 
   return (
     <div className="w-full relative group cursor-pointer">
-      {!formFile ? (
+      {!formFile || !isValidFile() ? (
         <>
           <input
             {...props}
@@ -56,12 +82,23 @@ export default function SingleFile({
               ou clique para selecionar
             </Text>
           </div>
-
-          {error && (
-            <Text variant="label-small" className="text-accent-red">
-              {error}
-            </Text>
-          )}
+          <div className="flex flex-col gap-1 mt-1">
+            {formFile && !isValidExtension() && (
+              <Text variant="label-small" className="text-accent-red">
+                Tipo de arquivo inválido
+              </Text>
+            )}
+            {formFile && !isValidSize() && (
+              <Text variant="label-small" className="text-accent-red">
+                Tamanho do arquivo ultrapassa o máximo
+              </Text>
+            )}
+            {error && (
+              <Text variant="label-small" className="text-accent-red">
+                {error}
+              </Text>
+            )}
+          </div>
         </>
       ) : (
         <div className="flex gap-3 items-center border border-solid border-border-primary mt-5 p-3 rounded">
@@ -80,8 +117,7 @@ export default function SingleFile({
                 type="button"
                 className={textVariants({
                   variant: "label-small",
-                  className:
-                    "text-accent-red cursor-pointer hover:underline",
+                  className: "text-accent-red cursor-pointer hover:underline",
                 })}
               >
                 Remover
