@@ -20,6 +20,7 @@ interface SingleFileProps
   allowedExtensions: string[];
   maxFileSize: number;
   form: any;
+  replaceBy: ReactNode;
   error?: ReactNode;
 }
 
@@ -29,6 +30,7 @@ export default function SingleFile({
   form,
   allowedExtensions,
   maxFileSize,
+  replaceBy,
   ...props
 }: SingleFileProps) {
   const formValue = useWatch({
@@ -101,6 +103,8 @@ export default function SingleFile({
           </div>
         </>
       ) : (
+        <>
+      <div>{replaceBy}</div>
         <div className="flex gap-3 items-center border border-solid border-border-primary mt-5 p-3 rounded">
           <Icon svg={FileImageIcon} className="w-6 h-6 fill-white" />
 
@@ -125,6 +129,7 @@ export default function SingleFile({
             </div>
           </div>
         </div>
+        </>
       )}
     </div>
   );
