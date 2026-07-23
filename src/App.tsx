@@ -4,6 +4,17 @@ import Checkbox from "./components/checkbox";
 import SingleFile from "./components/single-file";
 import { useForm } from "react-hook-form";
 import ImageFilePreview from "./components/image-file-preview";
+import Button from "./components/button";
+import {
+  Dialog,
+  DialogBody,
+  DialogClose,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTrigger,
+} from "./components/dialog";
+import Text from "./components/text";
 
 export default function App() {
   const form = useForm();
@@ -30,6 +41,25 @@ export default function App() {
           form={form}
           {...form.register("file")}
         />
+      </div>
+      <div>
+        <Dialog>
+          <DialogTrigger asChild>
+            <Button>Abrir Modal</Button>
+          </DialogTrigger>
+          <DialogContent>
+            <DialogHeader>Modal Teste</DialogHeader>
+            <DialogBody>
+              <Text>Conteúdo do modal</Text>
+            </DialogBody>
+            <DialogFooter>
+              <DialogClose asChild>
+                <Button variant="secondary">Cancelar</Button>
+              </DialogClose>
+              <Button>Confirmar</Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
       </div>
     </div>
   );
