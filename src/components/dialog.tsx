@@ -1,11 +1,11 @@
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 import type { ComponentProps } from "react";
-import Card from "./card";
+import Card from "@/components/ui/card";
 import cn from "classnames";
-import Text from "./text";
-import ButtonIcon from "./button-icon";
-import XIcon from "../assets/icons/x.svg?react";
-import Divider from "./divider";
+import Text from "@/components/ui/text";
+import ButtonIcon from "@/components/ui/button-icon";
+import XIcon from "@/assets/icons/x.svg?react";
+import Divider from "@/components/ui/divider";
 
 export const Dialog = DialogPrimitive.Root;
 export const DialogTrigger = DialogPrimitive.Trigger;

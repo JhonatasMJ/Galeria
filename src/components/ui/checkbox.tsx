@@ -1,5 +1,5 @@
-import Icon from "./icon";
-import CheckIcon from "../assets/icons/check.svg?react";
+import Icon from "@/components/ui/icon";
+import CheckIcon from "@/assets/icons/check.svg?react";
 import { type VariantProps, tv } from "tailwind-variants";
 import type { ComponentProps } from "react";
 

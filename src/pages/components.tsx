@@ -1,12 +1,12 @@
 import { useForm } from "react-hook-form";
-import InputText from "../components/input-text-";
-import Checkbox from "../components/checkbox";
-import SingleFile from "../components/single-file";
-import ImageFilePreview from "../components/image-file-preview";
-import { Dialog, DialogBody, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTrigger } from "../components/dialog";
-import Button from "../components/button";
-import Text from "../components/text";
-import SearchIcon from "../assets/icons/search.svg?react";
+import InputText from "@/components/input-text-";
+import Checkbox from "@/components/ui/checkbox";
+import SingleFile from "@/components/single-file";
+import ImageFilePreview from "@/components/image-file-preview";
+import { Dialog, DialogBody, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTrigger } from "@/components/dialog";
+import Button from "@/components/button";
+import Text from "@/components/ui/text";
+import SearchIcon from "@/assets/icons/search.svg?react";
 
 export default function PageComponents() {
     const form = useForm();

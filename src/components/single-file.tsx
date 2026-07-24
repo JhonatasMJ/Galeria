@@ -3,11 +3,11 @@ import { useMemo, type ComponentProps, type ReactNode } from "react";
 import { useWatch } from "react-hook-form";
 import { type VariantProps, tv } from "tailwind-variants";
 
-import Icon from "./icon";
-import Text, { textVariants } from "./text";
+import Icon from "@/components/ui/icon";
+import Text, { textVariants } from "@/components/ui/text";
 
-import FileIcon from "../assets/icons/upload-file.svg?react";
-import FileImageIcon from "../assets/icons/image.svg?react";
+import FileIcon from "@/assets/icons/upload-file.svg?react";
+import FileImageIcon from "@/assets/icons/image.svg?react";
 
 export const singleFilerVariants = tv({
   base: "flex flex-col items-center justify-center w-full group-hover:border-border-active border border-solid border-border-primary rounded-lg px-5 py-6 transition gap-1",

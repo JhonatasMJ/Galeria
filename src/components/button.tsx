@@ -1,8 +1,8 @@
 import React from "react";
-import Icon from "./icon";
-import Text from "./text";
+import Icon from "@/components/ui/icon";
+import Text from "@/components/ui/text";
 import {tv, type VariantProps} from "tailwind-variants";
-import SpinnerIcon from "../assets/icons/spinner.svg?react";
+import SpinnerIcon from "@/assets/icons/spinner.svg?react";
 import cx from "classnames";
 
 export const buttonVariants = tv({

@@ -1,6 +1,6 @@
 import { type VariantProps, tv } from "tailwind-variants";
-import Icon from "./icon";
-import Text from "./text";
+import Icon from "@/components/ui/icon";
+import Text from "@/components/ui/text";
 import type { ComponentProps, ReactNode } from "react";
 
 export const inputTextContainerVariants = tv({

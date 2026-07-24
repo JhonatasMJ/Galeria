@@ -1,7 +1,7 @@
 import React from "react";
-import Icon from "./icon";
+import Icon from "@/components/ui/icon";
 import {tv, type VariantProps} from "tailwind-variants";
-import SpinnerIcon from "../assets/icons/spinner.svg?react";
+import SpinnerIcon from "@/assets/icons/spinner.svg?react";
 
 export const buttonIconVariants = tv({
 	base: "inline-flex items-center justify-center cursor-pointer transition",
