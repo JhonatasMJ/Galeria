@@ -4,7 +4,7 @@ import Logo from "@/assets/images/galeria-plus-full-logo.svg?react";
 import { Link } from "react-router-dom";
 import cx from "classnames";
 import Button from "./button";
-import PhotoSearch from "./photo-search";
+import PhotoSearch from "@/components/photos/photo-search";
 import Divider from "./ui/divider";
 
 interface HeaderProps extends ComponentProps<"div"> {}

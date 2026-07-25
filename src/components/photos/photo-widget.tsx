@@ -1,9 +1,9 @@
 import type { Photo } from "@/types/https/photo";
-import ImagePreview from "./image-preview";
-import Skeleton from "./ui/skeleton";
-import Text from "./ui/text";
-import Badge from "./ui/badge";
-import { buttonTextVariants, buttonVariants } from "./button";
+import ImagePreview from "@/components/image-preview";
+import Skeleton from "@/components/ui/skeleton";
+import Text from "@/components/ui/text";
+import Badge from "@/components/ui/badge";
+import { buttonTextVariants, buttonVariants } from "@/components/button";
 import { Link } from "react-router-dom";
 
 interface PhotoWidgetProps {

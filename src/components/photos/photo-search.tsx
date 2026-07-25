@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import InputText from "./input-text-";
+import InputText from "@/components/input-text-";
 import SearchIcon from "@/assets/icons/search.svg?react";
 
 export default function PhotoSearch() {
