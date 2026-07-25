@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import InputText from "@/components/input-text-";
 import Checkbox from "@/components/ui/checkbox";
 import SingleFile from "@/components/single-file";
-import ImageFilePreview from "@/components/image-file-preview";
+import ImagePreview from "@/components/image-preview";
 import { Dialog, DialogBody, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTrigger } from "@/components/dialog";
 import Button from "@/components/button";
 import Text from "@/components/ui/text";
@@ -27,7 +27,7 @@ export default function PageComponents() {
         </div>
         <div>
           <SingleFile
-            replaceBy={<ImageFilePreview src={fileSrc} />}
+            replaceBy={<ImagePreview src={fileSrc} />}
             allowedExtensions={["jpg", "png", "jpeg", "webp"]}
             maxFileSize={50}
             form={form}
