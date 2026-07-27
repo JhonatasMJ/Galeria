@@ -1,3 +1,4 @@
+import AlbumsSelectable from "@/components/albums/albums-selectable";
 import Button from "@/components/button";
 import ImagePreview from "@/components/image-preview";
 import PhotosNavigator from "@/components/photos/photos-navigator";
@@ -19,6 +20,14 @@ export default function PhotoDetails() {
         id: "1",
         title: "Album 1",
       },
+      {
+        id: "2",
+        title: "Album 2",
+      },
+      {
+        id: "3",
+        title: "Album 3",
+      },
     ],
   } as Photo;
   return (
@@ -31,7 +40,7 @@ export default function PhotoDetails() {
         )}
         <PhotosNavigator />
       </header>
-      <div className="grid grid-cols-[21rem] gap-24">
+      <div className="grid grid-cols-[21rem_1fr] gap-24">
         <div className="flex flex-col gap-3">
           {!isLoadingPhoto ? (
             <ImagePreview
@@ -47,6 +56,10 @@ export default function PhotoDetails() {
           ) : (
             <Skeleton className="w-full h-10" />
           )}
+        </div>
+        <div className="py-3">
+          <Text as="h3" variant="heading-medium" className="mb-7">Álbuns</Text>
+          <AlbumsSelectable albums={photo.albums} photo={photo} />
         </div>
       </div>
     </Container>
