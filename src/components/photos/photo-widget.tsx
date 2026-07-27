@@ -60,7 +60,7 @@ export default function PhotoWidget({ photo, loading }: PhotoWidgetProps) {
       {!loading ? (
         <Link
           className={buttonVariants({ variant: "secondary", className: "px-2 py-2" })}
-          to={`/photo/${photo.id}`}
+          to={`/fotos/${photo.id}`}
         >
           <Text
             className={buttonTextVariants({ variant: "secondary", size: "sm" })}
