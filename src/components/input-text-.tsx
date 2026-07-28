@@ -46,7 +46,7 @@ interface InputTextProps
     VariantProps<typeof inputTextWrapperVariants>,
     Omit<ComponentProps<"input">, "size" | "disabled"> {
   icon?: ComponentProps<typeof Icon>["svg"];
-  error: ReactNode;
+  error?: ReactNode;
 }
 
 //Passo a estilização para o componente e a variação
