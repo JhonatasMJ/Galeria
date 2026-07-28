@@ -11,30 +11,17 @@ import {
 import Button from "../button";
 import InputText from "../input-text-";
 import Text from "../ui/text";
-import type { Photo } from "@/types/https/photo";
 import ImageEmpty from "@/assets/images/select-checkbox.svg?react";
 import Skeleton from "../ui/skeleton";
 import PhotoSelectable from "../photos/photo-selectable";
+import usePhotos from "@/hooks/use-photos";
 
 interface AlbumsDialogProps {
   trigger: ReactNode;
 }
 
 export default function AlbumsDialog({ trigger }: AlbumsDialogProps) {
-  const photos: Photo[] = [
-    {
-      id: "1",
-      title: "Photo 1",
-      imageId: "portrait-tower.png",
-      albums: [
-        {
-          id: "1",
-          title: "Album 1",
-        },
-      ],
-    },
-  ];
-  const isLoading = false;
+  const { photos, isLoadingPhotos } = usePhotos();
 
   function handleTogglePhoto(selected: boolean, photoId: string) {
     console.log(selected, photoId);
@@ -50,12 +37,12 @@ export default function AlbumsDialog({ trigger }: AlbumsDialogProps) {
             <Text as="div" variant="label-small">
               Fotos cadastradas
             </Text>
-            {!isLoading && photos.length > 0 && (
+            {!isLoadingPhotos && photos.length > 0 && (
               <div className="flex flex-wrap gap-2">
                 {photos.map((photo) => (
                   <PhotoSelectable
                     className="w-20 h-20 rounded"
-                    src={`/images/${photo.imageId}`}
+                    src={`${import.meta.env.VITE_API_URL}/images/${photo.imageId}`}
                     alt={photo.title}
                     onSelect={(selected) =>
                       handleTogglePhoto(selected, photo.id)
@@ -65,7 +52,7 @@ export default function AlbumsDialog({ trigger }: AlbumsDialogProps) {
               </div>
             )}
 
-            {isLoading && (
+            {isLoadingPhotos && (
               <div className="flex flex-wrap gap-2">
                 {" "}
                 {Array.from({ length: 4 }).map((_, index) => (
@@ -76,7 +63,7 @@ export default function AlbumsDialog({ trigger }: AlbumsDialogProps) {
                 ))}
               </div>
             )}
-            {!isLoading && photos.length === 0 && (
+            {!isLoadingPhotos && photos.length === 0 && (
               <div className="w-full flex flex-col justify-center items-center gap-3">
                 <ImageEmpty />
                 <Text variant="paragraph-medium" className="text-center">

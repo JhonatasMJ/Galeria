@@ -8,5 +8,5 @@ export default function useAlbums() {
         queryFn: () => fetcher("/albums"),
         
     })
-    return { albums:data ?? [], isLoading };
+    return { albums:data ?? [], isLoadingAlbums: isLoading };
 }

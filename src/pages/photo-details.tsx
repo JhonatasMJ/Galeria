@@ -11,7 +11,7 @@ import type { Photo } from "@/types/https/photo";
 
 export default function PhotoDetails() {
   /*   const { id } = useParams(); */
-  const {albums, isLoading} = useAlbums();
+  const {albums, isLoadingAlbums} = useAlbums();
   const isLoadingPhoto = false;
   const photo = {
     id: "1",
@@ -46,7 +46,7 @@ export default function PhotoDetails() {
         <div className="flex flex-col gap-3">
           {!isLoadingPhoto ? (
             <ImagePreview
-              src={`/images/${photo?.imageId}`}
+              src={`${import.meta.env.VITE_API_URL}/images/${photo?.imageId}`}
               title={photo?.title}
               imageClassName="h-[21rem]"
             />
@@ -61,7 +61,7 @@ export default function PhotoDetails() {
         </div>
         <div className="py-3">
           <Text as="h3" variant="heading-medium" className="mb-7">Álbuns</Text>
-          <AlbumsSelectable albums={albums} photo={photo} loading={isLoading} />
+          <AlbumsSelectable albums={albums} photo={photo} loading={isLoadingAlbums} />
         </div>
       </div>
     </Container>
