@@ -5,11 +5,13 @@ import PhotosNavigator from "@/components/photos/photos-navigator";
 import Container from "@/components/ui/container";
 import Skeleton from "@/components/ui/skeleton";
 import Text from "@/components/ui/text";
+import useAlbums from "@/hooks/use-albums";
 import type { Photo } from "@/types/https/photo";
 /* import { useParams } from "react-router-dom"; */
 
 export default function PhotoDetails() {
   /*   const { id } = useParams(); */
+  const {albums, isLoading} = useAlbums();
   const isLoadingPhoto = false;
   const photo = {
     id: "1",
@@ -59,7 +61,7 @@ export default function PhotoDetails() {
         </div>
         <div className="py-3">
           <Text as="h3" variant="heading-medium" className="mb-7">Álbuns</Text>
-          <AlbumsSelectable albums={photo.albums} photo={photo} />
+          <AlbumsSelectable albums={albums} photo={photo} loading={isLoading} />
         </div>
       </div>
     </Container>
