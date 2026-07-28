@@ -7,6 +7,7 @@ import Button from "./button";
 import PhotoSearch from "@/components/photos/photo-search";
 import Divider from "./ui/divider";
 import PhotoDialog from "./photos/photo-dialog";
+import AlbumsDialog from "./albums/albums-dialog";
 
 interface HeaderProps extends ComponentProps<"div"> {}
 
@@ -24,7 +25,7 @@ export default function Header({ className, ...props }: HeaderProps) {
       <Divider orientation="vertical" className="h-10" />
       <div className="flex items-center gap-3">
         <PhotoDialog trigger={<Button>Nova Foto</Button>} />
-        <Button variant="secondary">Criar Albúm</Button>
+        <AlbumsDialog trigger={<Button variant="secondary">Criar Albúm</Button>} />
       </div>
     </Container>
   );
