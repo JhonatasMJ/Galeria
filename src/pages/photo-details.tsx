@@ -1,6 +1,7 @@
 import AlbumsSelectable from "@/components/albums/albums-selectable";
 import Button from "@/components/button";
 import ImagePreview from "@/components/image-preview";
+import PhotoDeleteDialog from "@/components/photos/photo-delete-dialog";
 import PhotosNavigator from "@/components/photos/photos-navigator";
 import Container from "@/components/ui/container";
 import Skeleton from "@/components/ui/skeleton";
@@ -54,7 +55,7 @@ export default function PhotoDetails() {
             <Skeleton className="h-[21rem]" />
           )}
           {!isLoadingPhoto ? (
-            <Button variant="destructive">Excluir</Button>
+            <PhotoDeleteDialog trigger={<Button variant="destructive">Excluir</Button>} />
           ) : (
             <Skeleton className="w-full h-10" />
           )}

@@ -24,7 +24,7 @@ interface PhotoDialogProps {
 
 export default function PhotoDialog({ trigger }: PhotoDialogProps) {
   const form = useForm();
-  const { albums, isLoading } = useAlbums();
+  const { albums, isLoadingAlbums } = useAlbums();
   return (
     <Dialog>
       <DialogTrigger asChild>{trigger}</DialogTrigger>
@@ -47,7 +47,7 @@ export default function PhotoDialog({ trigger }: PhotoDialogProps) {
               Selecionar álbuns
             </Text>
             <div className="flex gap-3">
-              {!isLoading &&
+              {!isLoadingAlbums && 
                 albums.length > 0 &&
                 albums.map((album) => (
                   <Button
@@ -60,7 +60,7 @@ export default function PhotoDialog({ trigger }: PhotoDialogProps) {
                   </Button>
                 ))}
 
-              {isLoading &&
+              {isLoadingAlbums &&
                 Array.from({ length: 5 }).map((_, index) => (
                   <Skeleton
                     key={`album-skeleton-${index}`}
