@@ -7,32 +7,19 @@ import Container from "@/components/ui/container";
 import Skeleton from "@/components/ui/skeleton";
 import Text from "@/components/ui/text";
 import useAlbums from "@/hooks/use-albums";
+import usePhoto from "@/hooks/use-photo";
 import type { Photo } from "@/types/https/photo";
-/* import { useParams } from "react-router-dom"; */
+import { useParams } from "react-router-dom";
 
 export default function PhotoDetails() {
-  /*   const { id } = useParams(); */
-  const {albums, isLoadingAlbums} = useAlbums();
-  const isLoadingPhoto = false;
-  const photo = {
-    id: "1",
-    title: "Photo 1",
-    imageId: "portrait-tower.png",
-    albums: [
-      {
-        id: "1",
-        title: "Album 1",
-      },
-      {
-        id: "2",
-        title: "Album 2",
-      },
-      {
-        id: "3",
-        title: "Album 3",
-      },
-    ],
-  } as Photo;
+  const { id } = useParams();
+  const { albums, isLoadingAlbums } = useAlbums();
+  const { photo, isLoadingPhoto } = usePhoto(id);
+
+  if (!isLoadingPhoto && !photo) {
+    return <div>Foto não encontrada</div>;
+  }
+
   return (
     <Container>
       <header className="flex items-center justify-between gap-8 mb-8">
@@ -55,14 +42,22 @@ export default function PhotoDetails() {
             <Skeleton className="h-[21rem]" />
           )}
           {!isLoadingPhoto ? (
-            <PhotoDeleteDialog trigger={<Button variant="destructive">Excluir</Button>} />
+            <PhotoDeleteDialog
+              trigger={<Button variant="destructive">Excluir</Button>}
+            />
           ) : (
             <Skeleton className="w-full h-10" />
           )}
         </div>
         <div className="py-3">
-          <Text as="h3" variant="heading-medium" className="mb-7">Álbuns</Text>
-          <AlbumsSelectable albums={albums} photo={photo} loading={isLoadingAlbums} />
+          <Text as="h3" variant="heading-medium" className="mb-7">
+            Álbuns
+          </Text>
+          <AlbumsSelectable
+            albums={albums}
+            photo={photo as Photo}
+            loading={isLoadingAlbums}
+          />
         </div>
       </div>
     </Container>
