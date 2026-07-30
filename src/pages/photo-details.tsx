@@ -14,7 +14,7 @@ import { useParams } from "react-router-dom";
 export default function PhotoDetails() {
   const { id } = useParams();
   const { albums, isLoadingAlbums } = useAlbums();
-  const { photo, isLoadingPhoto } = usePhoto(id);
+  const { photo, isLoadingPhoto, nextPhotoId, previousPhotoId } = usePhoto(id);
 
   if (!isLoadingPhoto && !photo) {
     return <div>Foto não encontrada</div>;
@@ -28,7 +28,11 @@ export default function PhotoDetails() {
         ) : (
           <Skeleton className="w-48 h-8" />
         )}
-        <PhotosNavigator />
+        <PhotosNavigator
+          previousPhotoId={previousPhotoId}
+          nextPhotoId={nextPhotoId}
+          loading={isLoadingPhoto}
+        />
       </header>
       <div className="grid grid-cols-[21rem_1fr] gap-24">
         <div className="flex flex-col gap-3">
