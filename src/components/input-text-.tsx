@@ -17,10 +17,14 @@ export const inputTextWrapperVariants = tv({
     disable: {
       true: "pointer-events-none",
     },
-    defaultVariants: {
-      size: "md",
-      disable: false,
+    error: {
+      true: "border-accent-red focus:border-accent-red",
     },
+  },
+  defaultVariants: {
+    size: "md",
+    disable: false,
+    error: false,
   },
 });
 
@@ -43,7 +47,7 @@ export const inputTextIconVariants = tv({
 //Pega as propriedades do input e remove as propriedades de size e disabled
 interface InputTextProps
   extends
-    VariantProps<typeof inputTextWrapperVariants>,
+    Omit<VariantProps<typeof inputTextWrapperVariants>, "error">,
     Omit<ComponentProps<"input">, "size" | "disabled"> {
   icon?: ComponentProps<typeof Icon>["svg"];
   error?: ReactNode;
@@ -60,7 +64,7 @@ export default function InputText({
 }: InputTextProps) {
   return (
     <div className={inputTextContainerVariants({ className })}>
-      <div className={inputTextWrapperVariants({ size, disable })}>
+      <div className={inputTextWrapperVariants({ size, disable, error: !!error })}>
         {icon && (
           <Icon svg={icon} className={inputTextIconVariants({ size })} />
         )}

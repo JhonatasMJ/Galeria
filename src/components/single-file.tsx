@@ -11,11 +11,16 @@ import FileImageIcon from "@/assets/icons/image.svg?react";
 
 export const singleFilerVariants = tv({
   base: "flex flex-col items-center justify-center w-full group-hover:border-border-active border border-solid border-border-primary rounded-lg px-5 py-6 transition gap-1",
+  variants: {
+    error: {
+      true: "border-accent-red group-hover:border-accent-red",
+    },
+  },
 });
 
 interface SingleFileProps
   extends
-    VariantProps<typeof singleFilerVariants>,
+    Omit<VariantProps<typeof singleFilerVariants>, "error">,
     Omit<ComponentProps<"input">, "type"> {
   allowedExtensions: string[];
   maxFileSize: number;
@@ -65,6 +70,9 @@ export default function SingleFile({
     return isValidExtension() && isValidSize();
   }
 
+  const hasError =
+    !!error || (!!formFile && (!isValidExtension() || !isValidSize()));
+
   return (
     <div className="w-full relative group cursor-pointer">
       {!formFile || !isValidFile() ? (
@@ -75,7 +83,7 @@ export default function SingleFile({
             className="absolute top-0 right-0 w-full h-full opacity-0 cursor-pointer"
           />
 
-          <div className={singleFilerVariants({ className })}>
+          <div className={singleFilerVariants({ className, error: hasError })}>
             <Icon svg={FileIcon} className="w-8 h-8 fill-placeholder" />
 
             <Text variant="label-medium" className="text-placeholder">
