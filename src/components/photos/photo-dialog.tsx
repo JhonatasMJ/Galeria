@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import {
   Dialog,
   DialogBody,
@@ -31,14 +31,21 @@ export default function PhotoDialog({ trigger }: PhotoDialogProps) {
   const form = useForm<CreatePhotoSchema>({
     resolver: zodResolver(createPhotoSchema),
   });
+  const [modalOpen, setModalOpen] = useState(false);
+
+  useEffect(() => {
+    if(!modalOpen) {
+      form.reset();
+    }
+  },[modalOpen, form])
 
   function handleSubmit(payload: CreatePhotoSchema) {
-    console.log(payload);
+    
   }
 
   const { albums, isLoadingAlbums } = useAlbums();
   return (
-    <Dialog>
+    <Dialog open={modalOpen} onOpenChange={setModalOpen}>
       <DialogTrigger asChild>{trigger}</DialogTrigger>
       <DialogContent>
         <form onSubmit={form.handleSubmit(handleSubmit)}>
