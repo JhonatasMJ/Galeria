@@ -40,7 +40,7 @@ export default function PhotoSelectable({
       <Checkbox
         className="absolute top-1 left-1"
         size="sm"
-        checked={isSelected}
+        defaultChecked={isSelected}
         onChange={handleSelect}
       />
       <ImagePreview {...props} className="w-20 h-20 rounded" />

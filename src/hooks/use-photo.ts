@@ -19,7 +19,6 @@ export default function usePhoto(id?: string) {
   const queryClient = useQueryClient();
 
   async function createPhoto(payload: CreatePhotoSchema) {
-    // eslint-disable-next-line no-useless-catch
     try {
       const { data } = await api.post<Photo>("/photos", {
         title: payload.title,
