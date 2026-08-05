@@ -1,4 +1,4 @@
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, useState, useTransition, type ReactNode } from "react";
 import {
   Dialog,
   DialogBody,
@@ -23,6 +23,7 @@ import {
 } from "@/schemas/createPhoto";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { fileUrl } from "@/helpers/fileUrl";
+import usePhoto from "@/hooks/use-photo";
 interface PhotoDialogProps {
   trigger: ReactNode;
 }
@@ -33,6 +34,8 @@ export default function PhotoDialog({ trigger }: PhotoDialogProps) {
   });
   const [modalOpen, setModalOpen] = useState(false);
   const albumsIds = form.watch("albumsIds");
+  const [isCreating, startCreating] = useTransition();
+  const { createPhoto } = usePhoto();
 
   useEffect(() => {
     if (!modalOpen) {
@@ -40,11 +43,10 @@ export default function PhotoDialog({ trigger }: PhotoDialogProps) {
     }
   }, [modalOpen, form]);
 
-
   //Função para adicionar ou remover um álbum do formulário
   function handleToggleAlbum(albumId: string) {
     const albumsIds = form.getValues("albumsIds");
-    const albumsSet = new Set(albumsIds || []) ;
+    const albumsSet = new Set(albumsIds || []);
     if (albumsSet.has(albumId)) {
       albumsSet.delete(albumId);
     } else {
@@ -52,7 +54,12 @@ export default function PhotoDialog({ trigger }: PhotoDialogProps) {
     }
     form.setValue("albumsIds", Array.from(albumsSet));
   }
-  function handleSubmit(payload: CreatePhotoSchema) {}
+  function handleSubmit(payload: CreatePhotoSchema) {
+    startCreating(async () => {
+      await createPhoto(payload);
+      setModalOpen(false);
+    });
+  }
 
   const { albums, isLoadingAlbums } = useAlbums();
   return (
@@ -94,7 +101,9 @@ export default function PhotoDialog({ trigger }: PhotoDialogProps) {
                   albums.length > 0 &&
                   albums.map((album) => (
                     <Button
-                      variant={albumsIds?.includes(album.id) ? "primary" : "ghost"}
+                      variant={
+                        albumsIds?.includes(album.id) ? "primary" : "ghost"
+                      }
                       key={album.id}
                       size="sm"
                       className="truncate"
@@ -118,7 +127,9 @@ export default function PhotoDialog({ trigger }: PhotoDialogProps) {
             <DialogClose asChild>
               <Button variant="secondary">Cancelar</Button>
             </DialogClose>
-            <Button type="submit">Adicionar</Button>
+            <Button handling={isCreating} type="submit" disabled={isCreating}>
+              {isCreating ? "Adicionando..." : "Adicionar"}
+            </Button>
           </DialogFooter>
         </form>
       </DialogContent>
