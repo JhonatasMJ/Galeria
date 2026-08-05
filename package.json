@@ -30,6 +30,7 @@
     "react-hook-form": "^7.82.0",
     "react-router": "^8.3.0",
     "react-router-dom": "^7.18.1",
+    "sonner": "^2.0.7",
     "tailwind-variants": "^1.0.0",
     "tailwindcss": "^4.1.10",
     "zod": "^3.25.56"
